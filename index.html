@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trendverse</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendverse - Smart Vending Solutions</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background-color: #007bff; color: white; padding: 20px 0; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        section { padding: 40px; background-color: white; margin: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        footer { background-color: #333; color: white; text-align: center; padding: 10px 0; }
+        h1, h2 { color: #007bff; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        form { display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: auto; }
+        input, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        img.product-img { width: 100%; max-width: 400px; margin: 10px 0; border-radius: 10px; }
+    </style>
 </head>
 <body>
-  <h1>Welcome to Trendverse.in!</h1>
-  <p>Website deployed successfully 🚀</p>
+    <header>
+        <h1>Trendverse</h1>
+        <p>Smart Vending Machines | Innovative Solutions</p>
+        <nav>
+            <a href="#about">About Us</a>
+            <a href="#products">Products</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Trendverse</h2>
+        <p>We are leaders in smart vending machine solutions, offering automated snack vending machines, IT equipment vending solutions, and customized vending solutions for businesses across industries.</p>
+    </section>
+
+    <section id="products">
+        <h2>Our Products</h2>
+        <ul>
+            <li>Snack Vending Machines</li>
+            <li>IT Equipment Vending Machines</li>
+            <li>Customized Vending Solutions</li>
+            <li>Automated Locker Systems</li>
+        </ul>
+        <img src="https://via.placeholder.com/400x250?text=Snack+Vending+Machine" alt="Snack Vending Machine" class="product-img">
+        <img src="https://via.placeholder.com/400x250?text=IT+Equipment+Vending" alt="IT Equipment Vending" class="product-img">
+        <img src="https://via.placeholder.com/400x250?text=Locker+System" alt="Automated Locker System" class="product-img">
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="mailto:info@trendverse.in" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p>Email: info@trendverse.in</p>
+        <p>Phone: +91-XXXXXXXXXX</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Trendverse. All rights reserved.</p>
+    </footer>
 </body>
 </html>
