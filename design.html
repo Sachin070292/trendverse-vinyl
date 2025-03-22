@@ -3,61 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Your Product - Trendverse Point</title>
+    <title>Trendverse Point - Design Tool</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-        header { background: #007bff; color: white; text-align: center; padding: 20px; }
-        canvas { border: 1px solid #ccc; margin-top: 20px; }
-        .controls { text-align: center; margin: 20px 0; }
-        .controls input, .controls button { margin: 5px; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f7f7f7; }
+        h1 { text-align: center; color: #333; }
+        nav { text-align: center; margin-bottom: 30px; }
+        nav a { margin: 0 15px; text-decoration: none; color: #007bff; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        #canvasContainer { display: flex; justify-content: center; margin-top: 20px; }
+        canvas { border: 1px solid #ccc; background-color: white; }
+        .controls { max-width: 500px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, select, button { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background-color: #007bff; color: white; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
     </style>
 </head>
 <body>
     <header>
-        <h1>Design Your Product</h1>
-        <p>Create your own design and submit for printing</p>
-        <a href="index.html" style="color:white;">⬅ Back to Home</a>
+        <h1>Trendverse Point Design Tool</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="design.html">Design Tool</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
     <div class="controls">
-        <input type="file" id="imgUpload" accept="image/*">
-        <input type="text" id="textInput" placeholder="Add Text">
+        <label>Choose a Template:</label>
+        <select id="templateSelect">
+            <option value="none">Blank Canvas</option>
+            <option value="template1">Template 1 (Promo Banner)</option>
+            <option value="template2">Template 2 (Sale Poster)</option>
+            <option value="template3">Template 3 (Product Showcase)</option>
+        </select>
+
+        <label>Add Text:</label>
+        <input type="text" id="textInput" placeholder="Enter text">
         <button onclick="addText()">Add Text</button>
-        <button onclick="download()">Download Design</button>
+
+        <label>Upload Image:</label>
+        <input type="file" id="imageInput" accept="image/*">
+        <button onclick="addImage()">Add Image</button>
+
+        <button onclick="downloadCanvas()">Download Your Design</button>
     </div>
 
-    <center><canvas id="canvas" width="500" height="400"></canvas></center>
+    <div id="canvasContainer">
+        <canvas id="designCanvas" width="800" height="500"></canvas>
+    </div>
 
     <script>
-        const canvas = document.getElementById('canvas');
+        const canvas = document.getElementById('designCanvas');
         const ctx = canvas.getContext('2d');
 
-        document.getElementById('imgUpload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                }
-                img.src = event.target.result;
+        document.getElementById('templateSelect').addEventListener('change', loadTemplate);
+
+        function loadTemplate() {
+            const template = document.getElementById('templateSelect').value;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (template === 'template1') {
+                ctx.fillStyle = '#ffcc00';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#333';
+                ctx.font = '40px Arial';
+                ctx.fillText('Big Sale - Up to 50% Off!', 150, 250);
+            } else if (template === 'template2') {
+                ctx.fillStyle = '#ff6666';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#fff';
+                ctx.font = '40px Arial';
+                ctx.fillText('Mega Clearance!', 230, 250);
+            } else if (template === 'template3') {
+                ctx.fillStyle = '#66ccff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#333';
+                ctx.font = '35px Arial';
+                ctx.fillText('Your Product Here', 250, 250);
             }
-            reader.readAsDataURL(file);
-        });
+        }
 
         function addText() {
             const text = document.getElementById('textInput').value;
-            ctx.font = '24px Arial';
-            ctx.fillStyle = 'black';
-            ctx.fillText(text, 50, 50 + Math.random() * 300);
+            if (text) {
+                ctx.fillStyle = 'black';
+                ctx.font = '30px Arial';
+                ctx.fillText(text, 50, 450);
+            }
         }
 
-        function download() {
+        function addImage() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+            if (file) {
+                const img = new Image();
+                img.onload = function() {
+                    ctx.drawImage(img, 50, 50, 200, 200);
+                }
+                img.src = URL.createObjectURL(file);
+            }
+        }
+
+        function downloadCanvas() {
             const link = document.createElement('a');
-            link.download = 'your_design.png';
+            link.download = 'my_design.png';
             link.href = canvas.toDataURL();
             link.click();
         }
     </script>
+
+    <footer style="text-align:center; margin-top:30px; padding:20px; background-color:#333; color:#fff;">
+        &copy; 2024 Trendverse Point | <a href="mailto:info@trendverse.in" style="color:#fff; text-decoration:underline;">info@trendverse.in</a>
+    </footer>
 </body>
 </html>
